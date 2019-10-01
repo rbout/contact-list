@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -25,6 +25,8 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         flexGrow: 1,
+        fontWeight: 'bold',
+        fontSize: 30,
     },
     fab: {
         margin: theme.spacing(1),
@@ -60,13 +62,40 @@ export default function ButtonAppBar() {
         setOpen(false);
     };
 
+    const [userFields, setUserFields] = useState({
+        email: '',
+        phone: '',
+        firstName: '',
+        lastName: ''
+    });
+
+    const handleEmailChange = (event) => {
+        setUserFields({ ...userFields, email: event.target.value });
+    };
+
+    const handlePhoneChange = (event) => {
+        setUserFields({ ...userFields, phone: event.target.value });
+    };
+
+    const handleFirstNameChange = (event) => {
+        setUserFields({ ...userFields, firstName: event.target.value });
+    };
+
+    const handleLastNameChange = (event) => {
+        setUserFields({ ...userFields, lastName: event.target.value });
+    };
+
+    const handleSaveClick = () => {
+        setOpen(false);
+    };
+
     return (
         <div className={classes.root}>
             <ThemeProvider theme={theme}>
                 <AppBar position="static">
                     <Toolbar>
                         <Typography variant="h6" className={classes.title}>
-                            Contact List
+                            My Contacts
                         </Typography>
                         <Fab color="primary" aria-label="add" className={classes.fab} size={'medium'} onClick={handleClickOpen}>
                             <AddIcon />
@@ -78,7 +107,7 @@ export default function ButtonAppBar() {
                         <Button onClick={handleClose} color={"secondary"} className={classes.cancelButton}>
                             Cancel
                         </Button>
-                        <Button onClick={handleClose} color={"secondary"}>
+                        <Button onClick={handleSaveClick} color={"secondary"}>
                             Save
                         </Button>
                     </DialogActions>
@@ -95,6 +124,7 @@ export default function ButtonAppBar() {
                                 id="first-name"
                                 label="First Name"
                                 color={"secondary"}
+                                onChange={handleFirstNameChange}
                             />
                             <br />
                             <TextField
@@ -102,6 +132,7 @@ export default function ButtonAppBar() {
                                 id="last-name"
                                 label="Last Name"
                                 color={"secondary"}
+                                onChange={handleLastNameChange}
                             />
                         </div>
                         <br />
@@ -111,6 +142,7 @@ export default function ButtonAppBar() {
                             label="Email Address"
                             type="email"
                             color={"secondary"}
+                            onChange={handleEmailChange}
                             fullWidth={true}
                         />
                         <br />
@@ -119,6 +151,7 @@ export default function ButtonAppBar() {
                             id="phone"
                             label="Phone Number"
                             color={"secondary"}
+                            onChange={handlePhoneChange}
                             fullWidth={true}
                         />
                     </DialogContent>
