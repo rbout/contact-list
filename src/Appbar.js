@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -42,14 +42,10 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const theme = createMuiTheme({
-    palette: {
-        primary: { main: grey[50] },
-        secondary: { main: teal[400] }
-    },
-});
+const Navbar = props => {
 
-export default function ButtonAppBar() {
+    const { mainColor, addContacts } = props;
+
     const classes = useStyles();
 
     const [open, setOpen] = React.useState(false);
@@ -70,93 +66,105 @@ export default function ButtonAppBar() {
     });
 
     const handleEmailChange = (event) => {
-        setUserFields({ ...userFields, email: event.target.value });
+        setUserFields({...userFields, email: event.target.value});
     };
 
     const handlePhoneChange = (event) => {
-        setUserFields({ ...userFields, phone: event.target.value });
+        setUserFields({...userFields, phone: event.target.value});
     };
 
     const handleFirstNameChange = (event) => {
-        setUserFields({ ...userFields, firstName: event.target.value });
+        setUserFields({...userFields, firstName: event.target.value});
     };
 
     const handleLastNameChange = (event) => {
-        setUserFields({ ...userFields, lastName: event.target.value });
-    };
-
-    const handleSaveClick = () => {
-        setOpen(false);
+        setUserFields({...userFields, lastName: event.target.value});
     };
 
     return (
         <div className={classes.root}>
-            <ThemeProvider theme={theme}>
-                <AppBar position="static">
-                    <Toolbar>
-                        <Typography variant="h6" className={classes.title}>
-                            My Contacts
-                        </Typography>
-                        <Fab color="primary" aria-label="add" className={classes.fab} size={'medium'} onClick={handleClickOpen}>
-                            <AddIcon />
-                        </Fab>
-                    </Toolbar>
-                </AppBar>
-                <Dialog open={open} onClose={handleClose}>
-                    <DialogActions>
-                        <Button onClick={handleClose} color={"secondary"} className={classes.cancelButton}>
-                            Cancel
-                        </Button>
-                        <Button onClick={handleSaveClick} color={"secondary"}>
-                            Save
-                        </Button>
-                    </DialogActions>
-                    <DialogContent>
-                        <DialogContentText>
-                            Add new contact
-                        </DialogContentText>
-                        <Fab color="secondary" aria-label="add-photo" className={classes.fab} size={"large"}>
-                            Add Photo
-                        </Fab>
-                        <div className={classes.nameDiv}>
-                            <TextField
-                                margin="dense"
-                                id="first-name"
-                                label="First Name"
-                                color={"secondary"}
-                                onChange={handleFirstNameChange}
-                            />
-                            <br />
-                            <TextField
-                                margin="dense"
-                                id="last-name"
-                                label="Last Name"
-                                color={"secondary"}
-                                onChange={handleLastNameChange}
-                            />
-                        </div>
-                        <br />
+            <AppBar position="static" style={{ backgroundColor: mainColor }}>
+                <Toolbar>
+                    <Typography variant="h6" className={classes.title}>
+                        My Contacts
+                    </Typography>
+                    <Fab color="primary" aria-label="add" className={classes.fab} size={'medium'}
+                         onClick={handleClickOpen}>
+                        <AddIcon/>
+                    </Fab>
+                </Toolbar>
+            </AppBar>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogActions>
+                    <Button onClick={handleClose} color={"secondary"} className={classes.cancelButton}>
+                        Cancel
+                    </Button>
+                    <Button color={"secondary"} onClick={() => {
+                        setOpen(false);
+
+                        addContacts({
+                            email: userFields.email,
+                            name: userFields.firstName + " " + userFields.lastName,
+                        });
+                    }}
+                    >
+                        Save
+                    </Button>
+                </DialogActions>
+                <DialogContent>
+                    <DialogContentText>
+                        Add new contact
+                    </DialogContentText>
+                    <Fab color="secondary" aria-label="add-photo" className={classes.fab} size={"large"}>
+                        Add Photo
+                    </Fab>
+                    <div className={classes.nameDiv}>
                         <TextField
-                            margin="normal"
-                            id="email"
-                            label="Email Address"
-                            type="email"
+                            margin="dense"
+                            id="first-name"
+                            label="First Name"
                             color={"secondary"}
-                            onChange={handleEmailChange}
-                            fullWidth={true}
+                            onChange={handleFirstNameChange}
                         />
-                        <br />
+                        <br/>
                         <TextField
-                            margin="normal"
-                            id="phone"
-                            label="Phone Number"
+                            margin="dense"
+                            id="last-name"
+                            label="Last Name"
                             color={"secondary"}
-                            onChange={handlePhoneChange}
-                            fullWidth={true}
+                            onChange={handleLastNameChange}
                         />
-                    </DialogContent>
-                </Dialog>
-            </ThemeProvider>
+                    </div>
+                    <br/>
+                    <TextField
+                        margin="normal"
+                        id="email"
+                        label="Email Address"
+                        type="email"
+                        color={"secondary"}
+                        onChange={handleEmailChange}
+                        fullWidth={true}
+                    />
+                    <br/>
+                    <TextField
+                        margin="normal"
+                        id="phone"
+                        label="Phone Number"
+                        color={"secondary"}
+                        onChange={handlePhoneChange}
+                        fullWidth={true}
+                    />
+                </DialogContent>
+            </Dialog>
         </div>
     );
+};
+
+export default function ButtonAppBar({ theme, addContacts}) {
+    return (
+        <Navbar
+            mainColor={theme.palette.primary.main}
+            addContacts={addContacts}
+        />
+    )
 }
