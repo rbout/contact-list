@@ -83,7 +83,7 @@ const Navbar = props => {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static" style={{ backgroundColor: mainColor }}>
+            <AppBar position="static" style={{ backgroundColor: mainColor, marginBottom: '1.5rem'}}>
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>
                         My Contacts
