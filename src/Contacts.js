@@ -4,6 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import Fab from "@material-ui/core/Fab";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 
 export class Contacts extends Component {
 
@@ -19,10 +20,8 @@ export class Contacts extends Component {
             },
             fab: {
                 margin: theme.spacing(1),
-            },
-            contactDiv: {
                 display: 'inline-block',
-            }
+            },
         }));
 
         const { contacts } = this.props;
@@ -33,15 +32,16 @@ export class Contacts extends Component {
                     return <Grid item xs={12} key={contact.email} style={{ marginBottom: '1rem' }}>
                         <Paper className={classes.paper} style={{ padding: '1rem' }}>
                             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
-                                <div className={classes.contactDiv}>
+                                <div style={{marginRight: '85%'}}>
                                     <h4>{contact.name}</h4>
                                     <p>{contact.email}</p>
                                 </div>
-                                <div className={classes.contactDiv} style={{float: 'right'}}>
+                                <Fab aria-label="edit" className={classes.fab} style={{marginRight: '1rem'}}>
+                                    <EditIcon />
+                                </Fab>
                                     <Fab aria-label="delete" className={classes.fab}>
                                         <DeleteIcon />
                                     </Fab>
-                                </div>
                             </div>
                         </Paper>
                     </Grid>
