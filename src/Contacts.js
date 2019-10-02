@@ -8,6 +8,10 @@ import EditIcon from '@material-ui/icons/Edit';
 
 export class Contacts extends Component {
 
+    delete(id) {
+        this.props.delete(id);
+    }
+
     render() {
         const classes = makeStyles(theme => ({
             root: {
@@ -39,7 +43,7 @@ export class Contacts extends Component {
                                 <Fab aria-label="edit" className={classes.fab} style={{marginRight: '1rem'}}>
                                     <EditIcon />
                                 </Fab>
-                                    <Fab aria-label="delete" className={classes.fab}>
+                                    <Fab aria-label="delete" className={classes.fab} onClick={this.delete.bind(this, contact)}>
                                         <DeleteIcon />
                                     </Fab>
                             </div>

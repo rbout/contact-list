@@ -6,16 +6,25 @@ import {grey, teal} from "@material-ui/core/colors";
 import { ThemeProvider } from '@material-ui/styles';
 
 class App extends Component {
-    state = {
-        contacts: []
-    };
-
+    constructor() {
+        super();
+        this.state = {
+            contacts: []
+        };
+        this.deleteContact = this.deleteContact.bind(this);
+    }
 
     addContacts = contacts => {
             const newContact = [...this.state.contacts];
             newContact.push(contacts);
             this.setState({ ...this.state, contacts: newContact });
     };
+
+    deleteContact(id) {
+        this.setState(prevState => ({
+            contacts: prevState.contacts.filter(el => el != id)
+        }));
+    }
 
     render() {
 
@@ -32,7 +41,7 @@ class App extends Component {
             <div>
                 <ThemeProvider theme={theme}>
                     <Appbar addContacts={this.addContacts} theme={theme}/>
-                    <Contacts contacts={contacts} />
+                    <Contacts contacts={contacts} delete={this.deleteContact} />
                 </ThemeProvider>
             </div>
         );
