@@ -5,6 +5,7 @@ import Fab from "@material-ui/core/Fab";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import Avatar from '@material-ui/core/Avatar';
 
 export class Contacts extends Component {
 
@@ -36,7 +37,9 @@ export class Contacts extends Component {
                     return <Grid item xs={12} key={contact.email} style={{ marginBottom: '1rem' }}>
                         <Paper className={classes.paper} style={{ padding: '1rem' }}>
                             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
-                                <div style={{marginRight: '85%'}}>
+                                <Avatar src={contact.avatarImg} style={{marginRight: '1rem'}} />
+
+                                <div style={{marginRight: '90rem', width: '15rem'}}>
                                     <h4>{contact.name}</h4>
                                     <p>{contact.email}</p>
                                 </div>

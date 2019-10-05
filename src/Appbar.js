@@ -62,7 +62,8 @@ const Navbar = props => {
         email: '',
         phone: '',
         firstName: '',
-        lastName: ''
+        lastName: '',
+        avatarImg: ''
     });
 
     const handleEmailChange = (event) => {
@@ -79,6 +80,10 @@ const Navbar = props => {
 
     const handleLastNameChange = (event) => {
         setUserFields({...userFields, lastName: event.target.value});
+    };
+
+    const fileSelectorHandler = (event) => {
+        setUserFields({...userFields, avatarImg: event.target.files[0].name});
     };
 
     return (
@@ -105,6 +110,7 @@ const Navbar = props => {
                         addContacts({
                             email: userFields.email,
                             name: userFields.firstName + " " + userFields.lastName,
+                            avatarImg: userFields.avatarImg,
                         });
                     }}
                     >
@@ -115,9 +121,18 @@ const Navbar = props => {
                     <DialogContentText>
                         Add new contact
                     </DialogContentText>
-                    <Fab color="secondary" aria-label="add-photo" className={classes.fab} size={"large"}>
-                        Add Photo
-                    </Fab>
+                    <input
+                        accept="image/*"
+                        style={{ display: 'none' }}
+                        id="raised-button-file"
+                        type="file"
+                        onChange={fileSelectorHandler}
+                    />
+                    <label htmlFor="raised-button-file">
+                        <Button component="span" >
+                            Add photo
+                        </Button>
+                    </label>
                     <div className={classes.nameDiv}>
                         <TextField
                             margin="dense"
