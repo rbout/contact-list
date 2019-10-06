@@ -37,11 +37,12 @@ export class Contacts extends Component {
                     return <Grid item xs={12} key={contact.email} style={{ marginBottom: '1rem' }}>
                         <Paper className={classes.paper} style={{ padding: '1rem' }}>
                             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
-                                <Avatar src={contact.avatarImg} style={{marginRight: '1rem'}} />
+                                <Avatar style={{marginRight: '1rem'}}>{contact.name.substring(0,1)}</Avatar>
 
-                                <div style={{marginRight: '63rem', width: '15rem'}}>
+                                <div style={{marginRight: '78%', width: '15rem'}}>
                                     <h4>{contact.name}</h4>
                                     <p>{contact.email}</p>
+                                    <p>{contact.phone}</p>
                                 </div>
                                     <EditDialog contact={contact} editContact={editContact} />
                                     <Fab aria-label="delete" className={classes.fab} onClick={this.delete.bind(this, contact)}>

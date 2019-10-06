@@ -28,7 +28,7 @@ const EditDialog = props => {
 
     const [userFields, setUserFields] = useState({
         email: contact.email,
-        phone: '',
+        phone: contact.phone,
         name: contact.name,
         avatarImg: ''
     });
@@ -49,6 +49,10 @@ const EditDialog = props => {
         setUserFields({...userFields, email: event.target.value});
     };
 
+    const handlePhoneChange = (event) => {
+        setUserFields({...userFields, phone: event.target.value});
+    };
+
     return(
         <div className={classes.root}>
             <Fab aria-label="edit" className={classes.fab} style={{marginRight: '1rem'}} onClick={handleClickOpen}>
@@ -65,6 +69,7 @@ const EditDialog = props => {
                         editContact({
                             email: userFields.email,
                             name: userFields.name,
+                            phone: userFields.phone,
                         }, contact);
                     }}>
                         Edit
@@ -82,6 +87,13 @@ const EditDialog = props => {
                         label={contact.email}
                         type={"email"}
                         onChange={handleEmailChange}
+                    />
+                    <br />
+                    <TextField
+                        id={"phone"}
+                        label={contact.phone}
+                        type={"number"}
+                        onChange={handlePhoneChange}
                     />
                 </DialogContent>
             </Dialog>
