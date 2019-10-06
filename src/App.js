@@ -21,13 +21,9 @@ class App extends Component {
     };
 
     editContact = ( newContacts, prevContact ) => {
-        this.setState(prevState => ({
-            contacts: prevState.contacts.filter(el => el !== prevContact)
-        }));
-        console.log(prevContact);
-        const newContact = [...this.state.contacts];
-        newContact.push(newContacts);
-        this.setState({...this.state, contacts: newContact});
+        const newContactList = this.state.contacts.filter(el => el !== prevContact);
+        newContactList.push(newContacts);
+        this.setState({...this.state, contacts: newContactList});
     };
 
     deleteContact(id) {

@@ -39,7 +39,7 @@ export class Contacts extends Component {
                             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
                                 <Avatar src={contact.avatarImg} style={{marginRight: '1rem'}} />
 
-                                <div style={{marginRight: '90rem', width: '15rem'}}>
+                                <div style={{marginRight: '63rem', width: '15rem'}}>
                                     <h4>{contact.name}</h4>
                                     <p>{contact.email}</p>
                                 </div>
