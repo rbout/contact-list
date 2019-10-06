@@ -4,8 +4,8 @@ import Paper from "@material-ui/core/Paper";
 import Fab from "@material-ui/core/Fab";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
 import Avatar from '@material-ui/core/Avatar';
+import EditDialog from './EditDialog';
 
 export class Contacts extends Component {
 
@@ -29,7 +29,7 @@ export class Contacts extends Component {
             },
         }));
 
-        const { contacts } = this.props;
+        const { contacts, editContact } = this.props;
 
         return (
             <Grid container spacing={0}>
@@ -43,9 +43,7 @@ export class Contacts extends Component {
                                     <h4>{contact.name}</h4>
                                     <p>{contact.email}</p>
                                 </div>
-                                <Fab aria-label="edit" className={classes.fab} style={{marginRight: '1rem'}}>
-                                    <EditIcon />
-                                </Fab>
+                                    <EditDialog contact={contact} editContact={editContact} />
                                     <Fab aria-label="delete" className={classes.fab} onClick={this.delete.bind(this, contact)}>
                                         <DeleteIcon />
                                     </Fab>

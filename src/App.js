@@ -20,9 +20,19 @@ class App extends Component {
             this.setState({ ...this.state, contacts: newContact });
     };
 
+    editContact = ( newContacts, prevContact ) => {
+        this.setState(prevState => ({
+            contacts: prevState.contacts.filter(el => el !== prevContact)
+        }));
+        console.log(prevContact);
+        const newContact = [...this.state.contacts];
+        newContact.push(newContacts);
+        this.setState({...this.state, contacts: newContact});
+    };
+
     deleteContact(id) {
         this.setState(prevState => ({
-            contacts: prevState.contacts.filter(el => el != id)
+            contacts: prevState.contacts.filter(el => el !== id)
         }));
     }
 
@@ -41,7 +51,9 @@ class App extends Component {
             <div>
                 <ThemeProvider theme={theme}>
                     <Appbar addContacts={this.addContacts} theme={theme}/>
-                    <Contacts contacts={contacts} delete={this.deleteContact} />
+                    <Contacts contacts={contacts} delete={this.deleteContact} addContacts={this.addContacts}
+                        editContact={this.editContact}
+                    />
                 </ThemeProvider>
             </div>
         );
