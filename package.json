@@ -5,7 +5,7 @@
   "dependencies": {
     "@material-ui/styles": "latest",
     "@material-ui/core": "^4.4.3",
-    "@material-ui/icons": "^4.4.3"
+    "@material-ui/icons": "^4.4.3",
     "material-ui-dropzone": "^2.4.1",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
