@@ -108,6 +108,7 @@ const Navbar = props => {
                             email: userFields.email,
                             name: userFields.firstName + " " + userFields.lastName,
                             avatarImg: userFields.avatarImg,
+                            phone: userFields.phone,
                         });
                     }}
                     >
